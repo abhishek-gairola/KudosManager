@@ -1,5 +1,6 @@
 package com.kudos.kudosManager.controller;
 
+import com.kudos.kudosManager.entity.ProjectEntity;
 import com.kudos.kudosManager.entity.UserEntity;
 import com.kudos.kudosManager.model.User;
 import com.kudos.kudosManager.service.UserService;
@@ -16,6 +17,13 @@ public class UserController {
 
     @Autowired
     UserService userService;
+    /*
+    @GetMapping("/users/manager/{managerId}/projects/")
+
+    //UI Request Url : http://localhost:8080/users/manager/1/search?projectStatus=COMPLETED&techStack=Java
+    @GetMapping("/users/manager/{managerId}/search")
+    public List<ProjectEntity> searchProject(@PathVariable Long managerId,@RequestParam String projectStatus, )
+    */
 
     @GetMapping("/users")
     public List<UserEntity> getAllUsers() {
@@ -37,4 +45,19 @@ public class UserController {
     public List<UserEntity> getAllUsers(@PathVariable String lastName) {
         return userService.findByLastName(lastName);
     }
+
+    @GetMapping(value = "/leaderboard")
+    public List<UserEntity> getNameByKudos() {
+
+        return userService.findAllOrderByKudosAsc();
+    }
+
+
+    @PutMapping(value = "/projectHistory/{id} ")
+    public ResponseEntity<UserEntity> setUserStatus(@PathVariable int id){
+        return new ResponseEntity<>(null, HttpStatus.CREATED);
+    }
+
+
+
 }

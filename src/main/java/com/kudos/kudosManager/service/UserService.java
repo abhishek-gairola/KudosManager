@@ -58,4 +58,15 @@ public class UserService {
     }
 
 
+    public List<UserEntity> findAllOrderByKudosAsc() {
+
+        return repository.findAllOrderByKudosAsc();
+    }
+
+
+
+    public int setUserStatus(int id){
+        return  repository.setUserStatus(id);
+    }
+
 }
